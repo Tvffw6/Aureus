@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Aureus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1 class="logo">Aureus</h1>
+  <div>
+    <button onclick="showLogin()">Login</button>
+    <button class="gold" onclick="showRegister()">Register</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h2>Welcome to Aureus</h2>
+  <p>Une bibliothèque de sites exclusive basée sur ton niveau ⭐</p>
+</section>
+
+<div class="auth-container" id="auth">
+  <h3 id="authTitle">Login</h3>
+  <input id="username" placeholder="Username">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="submitAuth()">Valider</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
