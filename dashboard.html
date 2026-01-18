@@ -1,40 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Aureus Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">AUREUS</div>
+  <button onclick="logout()">Logout</button>
+</header>
+
 <div class="dashboard">
   <aside class="sidebar">
-    <h2>Aureus</h2>
-    <button onclick="show('sites')">Sites</button>
-    <button onclick="show('admin')" id="adminBtn">Admin Panel</button>
-    <button onclick="logout()">Logout</button>
+    <button onclick="showSection('sites')">Sites</button>
+    <button id="adminBtn" onclick="showSection('admin')">Admin Panel</button>
   </aside>
 
   <main class="content">
-    <div id="sites" class="section">
+
+    <section id="sites" class="section">
       <h2>Sites disponibles</h2>
       <div id="sitesList"></div>
-    </div>
+    </section>
 
-    <div id="admin" class="section hidden">
+    <section id="admin" class="section hidden">
       <h2>Admin Panel</h2>
 
       <div class="card">
         <h3>Ajouter un site</h3>
-        <input id="siteName" placeholder="Nom">
-        <input id="siteStars" type="number" min="1" max="5">
-        <input id="siteUrl" placeholder="Lien">
+
+        <div class="field">
+          <input id="siteName" required>
+          <label>Nom du site</label>
+        </div>
+
+        <div class="field">
+          <input id="siteStars" type="number" min="1" max="5" required>
+          <label>Étoiles requises</label>
+        </div>
+
+        <div class="field">
+          <input id="siteUrl" required>
+          <label>Lien</label>
+        </div>
+
         <button onclick="addSite()">Ajouter</button>
       </div>
 
       <div class="card">
-        <h3>Gérer étoiles utilisateur</h3>
-        <input id="targetUser" placeholder="Username">
-        <input id="targetStars" type="number" min="1" max="5">
+        <h3>Modifier étoiles utilisateur</h3>
+
+        <div class="field">
+          <input id="targetUser" required>
+          <label>Username</label>
+        </div>
+
+        <div class="field">
+          <input id="targetStars" type="number" min="1" max="5" required>
+          <label>Étoiles</label>
+        </div>
+
         <button onclick="setUserStars()">Valider</button>
       </div>
-    </div>
+
+    </section>
   </main>
 </div>
 
+<script src="script.js"></script>
 <script>
   if (localStorage.getItem("isAdmin") !== "true") {
     document.getElementById("adminBtn").style.display = "none";
   }
 </script>
+</body>
+</html>
