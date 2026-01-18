@@ -1,126 +1,93 @@
-:root {
-  --bg: #050505;
-  --bg2: #0c0c0c;
-  --red: #e10600;
-  --red-glow: rgba(225,6,0,0.6);
-  --text: #eaeaea;
+const ADMIN = {
+  username: "CIA",
+  password: "Yassine76140@"
+};
+
+let users = JSON.parse(localStorage.getItem("users")) || {};
+let sites = JSON.parse(localStorage.getItem("sites")) || [];
+
+function login() {
+  const u = username.value;
+  const p = password.value;
+
+  if (u === ADMIN.username && p === ADMIN.password) {
+    localStorage.setItem("currentUser", u);
+    localStorage.setItem("isAdmin", "true");
+    location.href = "dashboard.html";
+    return;
+  }
+
+  if (!users[u] || users[u].password !== p) {
+    alert("Login incorrect");
+    return;
+  }
+
+  localStorage.setItem("currentUser", u);
+  localStorage.setItem("isAdmin", "false");
+  location.href = "dashboard.html";
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+function register() {
+  if (!username.value || !password.value) return;
+
+  if (users[username.value]) {
+    alert("User déjà existant");
+    return;
+  }
+
+  users[username.value] = {
+    password: password.value,
+    stars: 1
+  };
+
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("Compte créé");
 }
 
-body {
-  background: radial-gradient(circle at top, #120000, #000);
-  color: var(--text);
+function logout() {
+  localStorage.clear();
+  location.href = "index.html";
 }
 
-button {
-  background: linear-gradient(135deg, var(--red), #700000);
-  border: none;
-  padding: 12px 18px;
-  color: white;
-  cursor: pointer;
-  border-radius: 8px;
-  box-shadow: 0 0 15px var(--red-glow);
-  transition: 0.3s;
+function showSection(id) {
+  document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
 }
 
-button:hover {
-  transform: scale(1.05);
+function addSite() {
+  sites.push({
+    name: siteName.value,
+    stars: Number(siteStars.value),
+    url: siteUrl.value
+  });
+
+  localStorage.setItem("sites", JSON.stringify(sites));
+  loadSites();
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 40px;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
+function loadSites() {
+  const list = document.getElementById("sitesList");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  const current = localStorage.getItem("currentUser");
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
+  const starLevel = isAdmin ? 5 : users[current]?.stars || 1;
+
+  sites.forEach(s => {
+    if (starLevel >= s.stars) {
+      list.innerHTML += `
+        <div class="card">
+          <h3>${s.name}</h3>
+          <p>⭐ ${s.stars}</p>
+          <a href="${s.url}" target="_blank">Accéder</a>
+        </div>
+      `;
+    }
+  });
 }
 
-.logo {
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--red);
-  text-shadow: 0 0 20px var(--red-glow);
-}
-
-.hero {
-  text-align: center;
-  margin-top: 120px;
-}
-
-.hero h1 {
-  font-size: 52px;
-  text-shadow: 0 0 30px var(--red-glow);
-}
-
-.hero p {
-  opacity: 0.7;
-  margin-top: 15px;
-}
-
-.auth {
-  margin: 80px auto;
-  width: 320px;
-  background: rgba(10,10,10,0.85);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.8);
-}
-
-.auth input {
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 12px;
-  background: #000;
-  border: 1px solid #300;
-  color: white;
-  border-radius: 6px;
-}
-
-/* DASHBOARD */
-
-.dashboard {
-  display: flex;
-  height: 100vh;
-}
-
-.sidebar {
-  width: 260px;
-  background: linear-gradient(180deg, #050505, #0d0000);
-  padding: 30px 20px;
-  box-shadow: inset -1px 0 0 #200;
-}
-
-.sidebar h2 {
-  color: var(--red);
-  margin-bottom: 30px;
-}
-
-.sidebar button {
-  width: 100%;
-  margin-bottom: 12px;
-}
-
-.content {
-  flex: 1;
-  padding: 40px;
-  overflow-y: auto;
-}
-
-.card {
-  background: rgba(15,0,0,0.6);
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.7);
-}
-
-.hidden {
-  display: none;
+if (location.pathname.includes("dashboard")) {
+  loadSites();
 }
