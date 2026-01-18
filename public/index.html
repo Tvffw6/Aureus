@@ -1,65 +1,54 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Aureus</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aureus - Home</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<canvas id="bgCanvas"></canvas>
-
-<header class="topbar">
-  <div class="logo">AUREUS</div>
+<header>
+  <div class="logo">Aureus</div>
+  <nav>
+    <button onclick="location.href='login.html'">Login</button>
+    <button onclick="location.href='login.html'">Register</button>
+  </nav>
 </header>
 
-<section class="hero">
-  <h1>Bienvenue sur Aureus</h1>
-  <p>Bibliothèque de sites premium et gratuits classés par étoiles.</p>
-  <button onclick="location.href='login.html'">Get Started</button>
-</section>
+<main class="home">
+  <section class="intro">
+    <h1>Bienvenue sur Aureus</h1>
+    <p>Accédez à notre bibliothèque de sites gratuits ou premium par étoiles. Explorez, partagez et découvrez !</p>
+    <button class="get-started" onclick="location.href='login.html'">Get Started</button>
+  </section>
 
-<section class="features">
-  <div class="feature-card">
-    <h3>Sites gratuits</h3>
-    <p>Accédez aux sites accessibles à tous.</p>
-  </div>
-  <div class="feature-card">
-    <h3>Sites premium</h3>
-    <p>Accédez aux sites exclusifs selon vos étoiles.</p>
-  </div>
-  <div class="feature-card">
-    <h3>Classement</h3>
-    <p>Montez dans le classement des utilisateurs.</p>
-  </div>
-</section>
+  <section class="features">
+    <div class="feature">
+      <h2>Classement par étoiles</h2>
+      <p>1 étoile = accès basique, jusqu’à 5 étoiles pour tout débloquer.</p>
+    </div>
+    <div class="feature">
+      <h2>Forum & Communauté</h2>
+      <p>Discutez avec les autres utilisateurs et partagez vos sites favoris.</p>
+    </div>
+    <div class="feature">
+      <h2>Admin Panel sécurisé</h2>
+      <p>Seul l’admin peut ajouter des sites et gérer les étoiles.</p>
+    </div>
+  </section>
 
-<script src="script.js"></script>
-<script>
-  // Animation simple background
-  const canvas = document.getElementById("bgCanvas");
-  const ctx = canvas.getContext("2d");
-  let w = canvas.width = window.innerWidth;
-  let h = canvas.height = window.innerHeight;
-  const particles = [];
-  for(let i=0;i<100;i++){
-    particles.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*2+1, dx:(Math.random()-0.5)*1, dy:(Math.random()-0.5)*1});
-  }
-  function animate(){
-    ctx.fillStyle = "#050505";
-    ctx.fillRect(0,0,w,h);
-    particles.forEach(p=>{
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle="#e10600";
-      ctx.fill();
-      p.x+=p.dx; p.y+=p.dy;
-      if(p.x<0||p.x>w)p.dx*=-1;
-      if(p.y<0||p.y>h)p.dy*=-1;
-    });
-    requestAnimationFrame(animate);
-  }
-  animate();
-  window.addEventListener("resize",()=>{w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;});
-</script>
+  <section class="categories">
+    <h2>Catégories populaires</h2>
+    <div class="category-list">
+      <span>Jeux</span>
+      <span>Proxy</span>
+      <span>Jeux + Proxy</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 Aureus. Tous droits réservés.</p>
+</footer>
 </body>
 </html>

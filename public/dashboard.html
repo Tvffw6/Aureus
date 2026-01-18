@@ -1,95 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard - Aureus</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aureus - Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
-<body>
-<header class="topbar">
-  <div class="logo">AUREUS</div>
-  <button onclick="logout()">Logout</button>
+<body onload="loadDashboard()">
+<header>
+  <div class="logo">Aureus</div>
+  <nav>
+    <button onclick="logout()">Logout</button>
+    <button onclick="document.getElementById('profile').scrollIntoView()">Profile</button>
+  </nav>
 </header>
 
-<div class="dashboard">
+<main class="dashboard">
   <aside class="sidebar">
-    <button onclick="showSection('sites')">Sites</button>
-    <button id="adminBtn" onclick="showSection('admin')">Admin Panel</button>
-    <button onclick="showSection('profile')">Profile</button>
-    <button onclick="showSection('ranking')">Classement</button>
-    <button onclick="showSection('forum')">Forum</button>
+    <button onclick="loadSites()">Sites</button>
+    <button onclick="document.getElementById('forumContainer').scrollIntoView()">Forum</button>
+    <button onclick="document.getElementById('rankingContainer').scrollIntoView()">Classement</button>
+    <div id="adminPanel" style="display:none;">
+      <h3>Admin Panel</h3>
+      <button onclick="promptAddSite()">Ajouter un site</button>
+    </div>
   </aside>
 
-  <main class="content">
-
-    <!-- SITES -->
-    <section id="sites" class="section">
-      <h2>Sites disponibles</h2>
-      <div id="sitesList"></div>
-    </section>
-
-    <!-- ADMIN PANEL -->
-    <section id="admin" class="section hidden">
-      <h2>Admin Panel</h2>
-      <div class="card">
-        <h3>Ajouter un site</h3>
-        <div class="field"><input id="siteName" required><label>Nom du site</label></div>
-        <div class="field"><input id="siteStars" type="number" min="1" max="5" required><label>Étoiles requises</label></div>
-        <div class="field"><input id="siteUrl" required><label>Lien</label></div>
-        <div class="field">
-          <select id="siteCategory">
-            <option value="Jeux">Jeux</option>
-            <option value="Proxy">Proxy</option>
-            <option value="Jeux+Proxy">Jeux+Proxy</option>
-          </select>
-          <label>Catégorie</label>
-        </div>
-        <button onclick="addSite()">Ajouter</button>
-      </div>
-
-      <div class="card">
-        <h3>Nommer un admin</h3>
-        <div class="field"><input id="adminUsername" required><label>Username</label></div>
-        <button onclick="makeAdmin()">Nommer</button>
-      </div>
-
-      <div class="card">
-        <h3>Mettre des étoiles</h3>
-        <div class="field"><input id="targetUser" required><label>Username</label></div>
-        <div class="field"><input id="targetStars" type="number" min="1" max="5" required><label>Étoiles</label></div>
-        <button onclick="setUserStars()">Valider</button>
-      </div>
-    </section>
-
-    <!-- PROFILE -->
-    <section id="profile" class="section hidden">
-      <h2>Profil</h2>
-      <img id="profileAvatar" src="images/default.png" style="width:100px; border-radius:50%;">
-      <input type="file" onchange="changeAvatar(this)">
-      <div class="field"><input id="profileUsername"><label>Username</label></div>
-      <div class="field"><input id="profileStatus"><label>Status</label></div>
+  <section class="content">
+    <div id="profile">
+      <h2>Profile</h2>
+      <p>Nom: <span id="profileName"></span></p>
       <p>Étoiles: <span id="profileStars"></span></p>
-      <button onclick="saveProfile()">Sauvegarder</button>
-    </section>
+      <p>Avatar: <img src="images/default.png" class="avatar"></p>
+    </div>
 
-    <!-- RANKING -->
-    <section id="ranking" class="section hidden">
-      <h2>Classement utilisateurs</h2>
-      <div id="rankingList"></div>
-    </section>
+    <div id="sitesContainer">
+      <h2>Sites</h2>
+    </div>
 
-    <!-- FORUM -->
-    <section id="forum" class="section hidden">
+    <div id="forumContainer">
       <h2>Forum</h2>
-      <textarea id="forumText" placeholder="Écrivez votre message..."></textarea>
-      <button onclick="postForum()">Poster</button>
-      <div id="forumList"></div>
-    </section>
+      <textarea id="forumText" placeholder="Écrire un message..."></textarea>
+      <button onclick="postForum(document.getElementById('forumText').value)">Envoyer</button>
+    </div>
 
-  </main>
-</div>
+    <div id="rankingContainer">
+      <h2>Classement</h2>
+    </div>
+  </section>
+</main>
 
-<script src="script.js"></script>
-<script>initDashboard();</script>
+<footer>
+  <p>&copy; 2026 Aureus. Tous droits réservés.</p>
+</footer>
 </body>
 </html>
