@@ -1,42 +1,40 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Aureus Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
 <div class="dashboard">
   <aside class="sidebar">
     <h2>Aureus</h2>
-    <button onclick="showSection('profile')">Profile</button>
-    <button onclick="showSection('sites')">Sites</button>
-    <button onclick="showSection('request')">Demande ⭐</button>
+    <button onclick="show('sites')">Sites</button>
+    <button onclick="show('admin')" id="adminBtn">Admin Panel</button>
     <button onclick="logout()">Logout</button>
   </aside>
 
   <main class="content">
-    <div id="profile" class="section">
-      <h3>Profile</h3>
-      <input id="newUsername" placeholder="Nouveau username">
-      <input id="newPassword" type="password" placeholder="Nouveau mot de passe">
-      <button onclick="updateProfile()">Sauvegarder</button>
-    </div>
-
-    <div id="sites" class="section hidden">
-      <h3>Bibliothèque de sites</h3>
+    <div id="sites" class="section">
+      <h2>Sites disponibles</h2>
       <div id="sitesList"></div>
     </div>
 
-    <div id="request" class="section hidden">
-      <h3>Demande d'étoiles</h3>
-      <textarea placeholder="Explique pourquoi tu veux plus d'étoiles"></textarea>
-      <button>Envoyer la demande</button>
+    <div id="admin" class="section hidden">
+      <h2>Admin Panel</h2>
+
+      <div class="card">
+        <h3>Ajouter un site</h3>
+        <input id="siteName" placeholder="Nom">
+        <input id="siteStars" type="number" min="1" max="5">
+        <input id="siteUrl" placeholder="Lien">
+        <button onclick="addSite()">Ajouter</button>
+      </div>
+
+      <div class="card">
+        <h3>Gérer étoiles utilisateur</h3>
+        <input id="targetUser" placeholder="Username">
+        <input id="targetStars" type="number" min="1" max="5">
+        <button onclick="setUserStars()">Valider</button>
+      </div>
     </div>
   </main>
 </div>
 
-<script src="script.js"></script>
-</body>
-</html>
+<script>
+  if (localStorage.getItem("isAdmin") !== "true") {
+    document.getElementById("adminBtn").style.display = "none";
+  }
+</script>
