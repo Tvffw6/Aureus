@@ -1,83 +1,91 @@
-let mode = "login";
+const ADMIN = {
+  username: "CIA",
+  password: "Yassine76140@"
+};
 
-function showLogin() {
-  mode = "login";
-  authTitle.innerText = "Login";
-}
+let users = JSON.parse(localStorage.getItem("users")) || {};
+let sites = JSON.parse(localStorage.getItem("sites")) || [];
 
-function showRegister() {
-  mode = "register";
-  authTitle.innerText = "Register";
-}
+function login() {
+  const u = username.value;
+  const p = password.value;
 
-function submitAuth() {
-  const user = username.value;
-  const pass = password.value;
-
-  if (!user || !pass) return alert("Champs manquants");
-
-  let users = JSON.parse(localStorage.getItem("users")) || {};
-
-  if (mode === "register") {
-    users[user] = { password: pass, stars: 1 };
-    localStorage.setItem("users", JSON.stringify(users));
+  if (u === ADMIN.username && p === ADMIN.password) {
+    localStorage.setItem("currentUser", u);
+    localStorage.setItem("isAdmin", "true");
+    location.href = "dashboard.html";
+    return;
   }
 
-  if (!users[user] || users[user].password !== pass) {
-    return alert("Erreur login");
+  if (!users[u] || users[u].password !== p) {
+    alert("Login incorrect");
+    return;
   }
 
-  localStorage.setItem("currentUser", user);
+  localStorage.setItem("currentUser", u);
+  localStorage.setItem("isAdmin", "false");
   location.href = "dashboard.html";
 }
 
-function showSection(id) {
+function register() {
+  if (users[username.value]) return alert("User existe déjà");
+
+  users[username.value] = {
+    password: password.value,
+    stars: 1
+  };
+
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("Compte créé");
+}
+
+function logout() {
+  localStorage.clear();
+  location.href = "index.html";
+}
+
+function show(id) {
   document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
-function logout() {
-  localStorage.removeItem("currentUser");
-  location.href = "index.html";
-}
+function addSite() {
+  sites.push({
+    name: siteName.value,
+    stars: parseInt(siteStars.value),
+    url: siteUrl.value
+  });
 
-function updateProfile() {
-  let users = JSON.parse(localStorage.getItem("users"));
-  let current = localStorage.getItem("currentUser");
-
-  if (newUsername.value) {
-    users[newUsername.value] = users[current];
-    delete users[current];
-    localStorage.setItem("currentUser", newUsername.value);
-  }
-
-  if (newPassword.value) {
-    users[current].password = newPassword.value;
-  }
-
-  localStorage.setItem("users", JSON.stringify(users));
-  alert("Profil mis à jour");
+  localStorage.setItem("sites", JSON.stringify(sites));
+  loadSites();
 }
 
 function loadSites() {
-  let user = localStorage.getItem("currentUser");
-  let users = JSON.parse(localStorage.getItem("users"));
-  let stars = users[user].stars;
-
-  let sites = [
-    { name: "Site 1", stars: 1 },
-    { name: "Site 3", stars: 3 },
-    { name: "Site 5", stars: 5 }
-  ];
-
-  let container = document.getElementById("sitesList");
+  const container = document.getElementById("sitesList");
   container.innerHTML = "";
 
+  const current = localStorage.getItem("currentUser");
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
+  const starLevel = isAdmin ? 5 : users[current]?.stars || 1;
+
   sites.forEach(s => {
-    if (stars >= s.stars) {
-      container.innerHTML += `<p>⭐ ${s.name}</p>`;
+    if (starLevel >= s.stars) {
+      container.innerHTML += `
+        <div class="card">
+          <h3>${s.name}</h3>
+          <p>⭐ ${s.stars}</p>
+          <a href="${s.url}" target="_blank">Accéder</a>
+        </div>
+      `;
     }
   });
+}
+
+function setUserStars() {
+  if (!users[targetUser.value]) return alert("User introuvable");
+  users[targetUser.value].stars = parseInt(targetStars.value);
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("Étoiles mises à jour");
 }
 
 if (location.pathname.includes("dashboard")) {
