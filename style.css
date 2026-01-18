@@ -1,62 +1,89 @@
+:root {
+  --bg: #050505;
+  --bg2: #0c0c0c;
+  --red: #e10600;
+  --red-glow: rgba(225,6,0,0.6);
+  --text: #eaeaea;
+}
+
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
 body {
-  background: #0b0b0f;
+  background: radial-gradient(circle at top, #120000, #000);
+  color: var(--text);
+}
+
+button {
+  background: linear-gradient(135deg, var(--red), #700000);
+  border: none;
+  padding: 12px 18px;
   color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 0 15px var(--red-glow);
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
 
 .topbar {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  background: #111;
+  align-items: center;
+  padding: 25px 40px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
 }
 
 .logo {
-  color: gold;
-}
-
-button {
-  background: #222;
-  color: white;
-  border: 1px solid #444;
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: gold;
-  color: black;
-}
-
-.gold {
-  background: gold;
-  color: black;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--red);
+  text-shadow: 0 0 20px var(--red-glow);
 }
 
 .hero {
   text-align: center;
-  padding: 80px 20px;
+  margin-top: 120px;
 }
 
-.auth-container {
-  width: 300px;
-  margin: auto;
-  background: #111;
-  padding: 20px;
-  border-radius: 8px;
+.hero h1 {
+  font-size: 52px;
+  text-shadow: 0 0 30px var(--red-glow);
 }
 
-.auth-container input {
+.hero p {
+  opacity: 0.7;
+  margin-top: 15px;
+}
+
+.auth {
+  margin: 80px auto;
+  width: 320px;
+  background: rgba(10,10,10,0.85);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+}
+
+.auth input {
   width: 100%;
-  margin: 10px 0;
-  padding: 10px;
+  margin-bottom: 12px;
+  padding: 12px;
+  background: #000;
+  border: 1px solid #300;
+  color: white;
+  border-radius: 6px;
 }
+
+/* DASHBOARD */
 
 .dashboard {
   display: flex;
@@ -64,30 +91,36 @@ button:hover {
 }
 
 .sidebar {
-  width: 220px;
-  background: #111;
-  padding: 20px;
+  width: 260px;
+  background: linear-gradient(180deg, #050505, #0d0000);
+  padding: 30px 20px;
+  box-shadow: inset -1px 0 0 #200;
+}
+
+.sidebar h2 {
+  color: var(--red);
+  margin-bottom: 30px;
 }
 
 .sidebar button {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .content {
   flex: 1;
-  padding: 30px;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.card {
+  background: rgba(15,0,0,0.6);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
 }
 
 .hidden {
   display: none;
-}
-
-.section {
-  animation: fade 0.4s;
-}
-
-@keyframes fade {
-  from {opacity: 0;}
-  to {opacity: 1;}
 }
