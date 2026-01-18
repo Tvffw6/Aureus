@@ -6,33 +6,60 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<canvas id="bgCanvas"></canvas>
 
 <header class="topbar">
   <div class="logo">AUREUS</div>
-  <nav></nav>
 </header>
 
 <section class="hero">
   <h1>Bienvenue sur Aureus</h1>
-  <p>Bibliothèque de sites premium et gratuits classés par étoiles</p>
+  <p>Bibliothèque de sites premium et gratuits classés par étoiles.</p>
   <button onclick="location.href='login.html'">Get Started</button>
 </section>
 
 <section class="features">
   <div class="feature-card">
     <h3>Sites gratuits</h3>
-    <p>Accédez à des sites disponibles pour tous.</p>
+    <p>Accédez aux sites accessibles à tous.</p>
   </div>
   <div class="feature-card">
     <h3>Sites premium</h3>
-    <p>Accès aux sites les plus exclusifs selon vos étoiles.</p>
+    <p>Accédez aux sites exclusifs selon vos étoiles.</p>
   </div>
   <div class="feature-card">
-    <h3>Classement par étoiles</h3>
-    <p>Plus vous êtes actif, plus vous gagnez d’étoiles.</p>
+    <h3>Classement</h3>
+    <p>Montez dans le classement des utilisateurs.</p>
   </div>
 </section>
 
 <script src="script.js"></script>
+<script>
+  // Animation simple background
+  const canvas = document.getElementById("bgCanvas");
+  const ctx = canvas.getContext("2d");
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+  const particles = [];
+  for(let i=0;i<100;i++){
+    particles.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*2+1, dx:(Math.random()-0.5)*1, dy:(Math.random()-0.5)*1});
+  }
+  function animate(){
+    ctx.fillStyle = "#050505";
+    ctx.fillRect(0,0,w,h);
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle="#e10600";
+      ctx.fill();
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<0||p.x>w)p.dx*=-1;
+      if(p.y<0||p.y>h)p.dy*=-1;
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+  window.addEventListener("resize",()=>{w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;});
+</script>
 </body>
 </html>
