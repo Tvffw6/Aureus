@@ -1,0 +1,25 @@
+{
+  "users": {
+    "CIA": {
+      "password": "Yassine76140@",
+      "stars": 5,
+      "isAdmin": true,
+      "avatar": "images/default.png",
+      "status": "🟢 Fonctionnement"
+    }
+  },
+  "sites": [
+    {
+      "name": "Exemple Site",
+      "url": "https://example.com",
+      "stars": 1,
+      "category": "Jeux"
+    }
+  ],
+  "forum": [
+    {
+      "user": "CIA",
+      "text": "Bienvenue sur le forum Aureus!"
+    }
+  ]
+}
