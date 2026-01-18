@@ -9,30 +9,29 @@
 
 <header class="topbar">
   <div class="logo">AUREUS</div>
-  <a href="dashboard.html" class="nav-btn">Dashboard</a>
+  <nav></nav>
 </header>
 
 <section class="hero">
-  <h1>Restricted Library</h1>
-  <p>Accès aux sites selon ton niveau ⭐</p>
+  <h1>Bienvenue sur Aureus</h1>
+  <p>Bibliothèque de sites premium et gratuits classés par étoiles</p>
+  <button onclick="location.href='login.html'">Get Started</button>
 </section>
 
-<div class="auth-box">
-  <h2>Login / Register</h2>
-
-  <div class="field">
-    <input id="username" required>
-    <label>Username</label>
+<section class="features">
+  <div class="feature-card">
+    <h3>Sites gratuits</h3>
+    <p>Accédez à des sites disponibles pour tous.</p>
   </div>
-
-  <div class="field">
-    <input id="password" type="password" required>
-    <label>Password</label>
+  <div class="feature-card">
+    <h3>Sites premium</h3>
+    <p>Accès aux sites les plus exclusifs selon vos étoiles.</p>
   </div>
-
-  <button onclick="login()">Login</button>
-  <button class="outline" onclick="register()">Register</button>
-</div>
+  <div class="feature-card">
+    <h3>Classement par étoiles</h3>
+    <p>Plus vous êtes actif, plus vous gagnez d’étoiles.</p>
+  </div>
+</section>
 
 <script src="script.js"></script>
 </body>
