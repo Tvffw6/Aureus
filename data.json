@@ -4,7 +4,11 @@
       "password": "Yassine76140@",
       "stars": 5,
       "isAdmin": true,
+<<<<<<< HEAD
       "avatar": "public/images/default.png",
+=======
+      "avatar": "images/default.png",
+>>>>>>> 11504bfe6398a4126fc5bfd52f55b2c226879d8e
       "status": "🟢 Fonctionnement"
     }
   },

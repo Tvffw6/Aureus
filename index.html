@@ -2,53 +2,36 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aureus - Home</title>
-<link rel="stylesheet" href="style.css">
+<title>Aureus</title>
+<link rel="stylesheet" href="public/style.css">
 </head>
 <body>
-<header>
-  <div class="logo">Aureus</div>
-  <nav>
-    <button onclick="location.href='login.html'">Login</button>
-    <button onclick="location.href='login.html'">Register</button>
-  </nav>
-</header>
+<div id="home-container">
+  <h1>Bienvenue sur Aureus</h1>
+  <p>Explorez gratuitement des sites classés par étoiles, rejoignez le forum et découvrez du contenu exclusif.</p>
 
-<main class="home">
-  <section class="intro">
-    <h1>Bienvenue sur Aureus</h1>
-    <p>Accédez à notre bibliothèque de sites gratuits ou premium par étoiles. Explorez, partagez et découvrez !</p>
-    <button class="get-started" onclick="location.href='login.html'">Get Started</button>
-  </section>
+  <div class="home-buttons">
+    <a href="login.html"><button id="getStartedBtn">Get Started</button></a>
+  </div>
 
-  <section class="features">
+  <section id="features">
     <div class="feature">
-      <h2>Classement par étoiles</h2>
-      <p>1 étoile = accès basique, jusqu’à 5 étoiles pour tout débloquer.</p>
+      <h2>Sites classés</h2>
+      <p>Accédez aux sites gratuits et premium selon vos étoiles.</p>
     </div>
     <div class="feature">
-      <h2>Forum & Communauté</h2>
-      <p>Discutez avec les autres utilisateurs et partagez vos sites favoris.</p>
+      <h2>Forum</h2>
+      <p>Discutez, partagez et découvrez les dernières nouveautés.</p>
     </div>
     <div class="feature">
-      <h2>Admin Panel sécurisé</h2>
-      <p>Seul l’admin peut ajouter des sites et gérer les étoiles.</p>
+      <h2>Dashboard personnalisé</h2>
+      <p>Suivez vos étoiles, changez votre avatar et votre statut.</p>
     </div>
   </section>
 
-  <section class="categories">
-    <h2>Catégories populaires</h2>
-    <div class="category-list">
-      <span>Jeux</span>
-      <span>Proxy</span>
-      <span>Jeux + Proxy</span>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <p>&copy; 2026 Aureus. Tous droits réservés.</p>
-</footer>
+  <footer>
+    <p>&copy; 2026 Aureus | Tous droits réservés</p>
+  </footer>
+</div>
 </body>
 </html>
