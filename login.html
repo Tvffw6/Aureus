@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Aureus Login</title>
+<link rel="stylesheet" href="public/style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+<h1>Login / Register</h1>
+
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login(document.getElementById('username').value, document.getElementById('password').value)">Login</button>
+<button onclick="register(document.getElementById('username').value, document.getElementById('password').value)">Register</button>
+</body>
+</html>

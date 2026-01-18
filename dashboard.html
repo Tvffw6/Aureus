@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Aureus</title>
+<link rel="stylesheet" href="public/style.css">
+<script src="script.js" defer></script>
+</head>
+<body onload="loadDashboard()">
+
+<h1>Dashboard</h1>
+<img id="avatar" src="public/images/default.png" width="100">
+<p>Pseudo: <span id="username"></span></p>
+<p>Étoiles: <span id="stars"></span></p>
+<p>Status: <span id="status"></span></p>
+
+<button onclick="logout()">Logout</button>
+<hr>
+<button onclick="loadSites()">Sites</button>
+<button onclick="loadForum()">Forum</button>
+
+<div id="sitesSection" style="display:none;">
+  <h2>Sites</h2>
+  <div id="sitesList"></div>
+</div>
+
+<div id="forumSection" style="display:none;">
+  <h2>Forum</h2>
+  <div id="forumList"></div>
+</div>
+
+<div id="adminPanel" style="display:none;">
+  <h2>Admin Panel</h2>
+  <input type="text" id="siteName" placeholder="Nom du site">
+  <input type="number" id="siteStars" placeholder="Étoiles">
+  <input type="text" id="siteCategory" placeholder="Catégorie">
+  <button onclick="addSite(document.getElementById('siteName').value,parseInt(document.getElementById('siteStars').value),document.getElementById('siteCategory').value)">Ajouter site</button>
+</div>
+
+</body>
+</html>
