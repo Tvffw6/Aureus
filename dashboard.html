@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Aureus Dashboard</title>
+  <title>Dashboard - Aureus</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -71,9 +71,19 @@
 
 <script src="script.js"></script>
 <script>
-  if (localStorage.getItem("isAdmin") !== "true") {
+  // Check login et admin
+  const current = localStorage.getItem("currentUser");
+  if (!current) {
+    alert("Connectez-vous pour accéder au dashboard !");
+    location.href = "login.html";
+  }
+
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
+  if (!isAdmin) {
     document.getElementById("adminBtn").style.display = "none";
   }
+
+  loadSites();
 </script>
 </body>
 </html>
